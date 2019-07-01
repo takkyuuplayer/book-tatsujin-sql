@@ -8,7 +8,7 @@
   "scripts": {
     "up": "npx db-migrate up",
     "reset": "npx db-migrate reset",
-    "test": "yarn up --env mysql; yarn up --env pgsql; yarn up --env sqlite3"
+    "test": "yarn reset --env mysql && yarn up --env mysql; yarn reset --env pgsql && yarn up --env pgsql; yarn reset --env sqlite3 && yarn up --env sqlite3"
   },
   "devDependencies": {
     "db-migrate": "^0.11.6",
