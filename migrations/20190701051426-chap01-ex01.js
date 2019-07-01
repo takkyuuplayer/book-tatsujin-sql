@@ -14,13 +14,19 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
-  return db.createTable("greatests", {
+exports.up = async function(db) {
+  await db.createTable("greatests", {
     key: "string",
     x: "int",
     y: "int",
     z: "int"
   });
+
+  return Promise.all(
+    [["A", 1, 2, 3], ["B", 5, 5, 2], ["C", 4, 7, 1], ["D", 3, 3, 8]].map(item =>
+      db.insert("greatests", ["key", "x", "y", "z"], item)
+    )
+  );
 };
 
 exports.down = function(db) {
