@@ -19,8 +19,8 @@ jobs:
           key: v1-node_modules-{{ checksum "package.json" }}
 
       - run: |
-          docker exec --user root dockerize -wait tcp://localhost:5432 -timeout 1m
-          docker exec --user root dockerize -wait tcp://localhost:3306-timeout 1m
+          docker exec --user root -i book-tatsujin-sqldockerize -wait tcp://localhost:5432 -timeout 1m
+          docker exec --user root -i book-tatsujin-sqldockerize -wait tcp://localhost:3306 -timeout 1m
 
       - run: docker exec -i book-tatsujin-sql yarn test
 
