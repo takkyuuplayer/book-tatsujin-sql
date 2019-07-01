@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-node_modules-{{ checksum "package.json" }}
+          - v1-node_modules-
+
+      - run: docker-compose up -d --build
+
+      - run: |
+          docker exec --user root book-tatsujin-sql chown -R circleci:circleci /srv/work
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://pgsql-server:5432 -timeout 1m
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://mysql-server:3306 -timeout 1m
+
+      - run: docker exec book-tatsujin-sql yarn install
+
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: v1-node_modules-{{ checksum "package.json" }}
+
+      - run: docker exec book-tatsujin-sql yarn test
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
