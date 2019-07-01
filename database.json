@@ -1,0 +1,14 @@
+{
+  "defaultEnv": "mysql",
+  "sqlite3": {
+    "driver": "sqlite3",
+    "filename": ":memory:"
+  },
+  "mysql": {
+    "database": "circle_test",
+    "driver": "mysql",
+    "host": "mysql-server",
+    "multipleStatements": true,
+    "user": "root"
+  }
+}
