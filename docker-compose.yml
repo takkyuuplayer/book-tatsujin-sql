@@ -12,8 +12,8 @@ services:
     tty: true
     command: sh
     volumes:
-      - ./:/srv/work
-    working_dir: /srv/work
+      - ./:~/
+    working_dir: ~/
   mysql-server:
     image: circleci/mysql:latest-ram
     shm_size: '256mb'
