@@ -1,0 +1,19 @@
+version: '3'
+services:
+  book-tatsujin-sql:
+    image: circleci/node:latest
+    links:
+      - mysql-server
+    depends_on:
+        - mysql-server
+    tty: true
+    command: sh
+    volumes:
+      - ./:/srv/work
+    working_dir: /srv/work
+  mysql-server:
+    image: circleci/mysql:latest-ram
+    shm_size: '256mb'
+    command: [--default-authentication-plugin=mysql_native_password]
+    ports:
+      - 3306:3306
