@@ -5,24 +5,26 @@ jobs:
     steps:
       - checkout
 
-      - run: docker-compose up -d
-      - run: docker exec --user root -i book-tatsujin-sql chown -R circleci:circleci /srv/work
-
       - restore_cache:
           keys:
           - v1-node_modules-{{ checksum "package.json" }}
           - v1-node_modules-
-      - run: docker exec -i book-tatsujin-sql yarn install
+
+      - run: docker-compose up -d --build
+
+      - run: |
+          docker exec --user root book-tatsujin-sql chown -R circleci:circleci /srv/work
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://localhost:5432 -timeout 1m
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      - run: docker exec book-tatsujin-sql yarn install
+
       - save_cache:
           paths:
             - ./node_modules
           key: v1-node_modules-{{ checksum "package.json" }}
 
-      - run: |
-          docker exec --user root -i book-tatsujin-sqldockerize -wait tcp://localhost:5432 -timeout 1m
-          docker exec --user root -i book-tatsujin-sqldockerize -wait tcp://localhost:3306 -timeout 1m
-
-      - run: docker exec -i book-tatsujin-sql yarn test
+      - run: docker exec book-tatsujin-sql yarn test
 
 workflows:
   version: 2
