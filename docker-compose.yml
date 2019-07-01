@@ -1,0 +1,34 @@
+version: '3'
+services:
+  app:
+    container_name: book-tatsujin-sql
+    image: circleci/node:latest
+    links:
+      - mysql-server
+      - pgsql-server
+    depends_on:
+        - mysql-server
+        - pgsql-server
+    tty: true
+    command: sh
+    volumes:
+      - ./:/srv/work
+    working_dir: /srv/work
+  mysql-server:
+    image: circleci/mysql:latest-ram
+    shm_size: '256mb'
+    command: [--default-authentication-plugin=mysql_native_password]
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: passw0rd
+      MYSQL_DATABASE: circle_test
+  pgsql-server:
+    image: circleci/postgres:latest-ram
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: passw0rd
+      POSTGRES_DB: circle_test
