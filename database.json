@@ -2,7 +2,7 @@
   "defaultEnv": "mysql",
   "sqlite3": {
     "driver": "sqlite3",
-    "filename": ":memory:"
+    "filename": "./circle_test.sqlite3"
   },
   "mysql": {
     "database": "circle_test",
