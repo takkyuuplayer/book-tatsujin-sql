@@ -15,7 +15,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = async function(db) {
-  await db.createTable("pop_tbl_2", {
+  await db.createTable("PopTbl2", {
     pref_name: "string",
     sex: "int",
     population: "int"
@@ -40,13 +40,13 @@ exports.up = async function(db) {
       ["東京", 1, 250],
       ["東京", 2, 150]
     ].map(item =>
-      db.insert("pop_tbl_2", ["pref_name", "sex", "population"], item)
+      db.insert("PopTbl2", ["pref_name", "sex", "population"], item)
     )
   );
 };
 
 exports.down = function(db) {
-  return db.dropTable("pop_tbl_2");
+  return db.dropTable("PopTbl2");
 };
 
 exports._meta = {
