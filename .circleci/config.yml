@@ -14,8 +14,8 @@ jobs:
 
       - run: |
           docker exec --user root book-tatsujin-sql chown -R circleci:circleci /srv/work
-          docker exec --user root book-tatsujin-sql dockerize -wait tcp://localhost:5432 -timeout 1m
-          docker exec --user root book-tatsujin-sql dockerize -wait tcp://localhost:3306 -timeout 1m
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://pgsql-server:5432 -timeout 1m
+          docker exec --user root book-tatsujin-sql dockerize -wait tcp://mysql-server:3306 -timeout 1m
 
       - run: docker exec book-tatsujin-sql yarn install
 
