@@ -6,7 +6,7 @@ jobs:
       - checkout
 
       - run: docker-compose up -d
-      - run: docker exec -i book-tatsujin-sql chown -R circleci:circleci /srv/work
+      - run: docker exec --user root -i book-tatsujin-sql chown -R circleci:circleci /srv/work
 
       - restore_cache:
           keys:
