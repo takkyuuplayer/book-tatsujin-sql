@@ -7,11 +7,13 @@
   "license": "MIT",
   "scripts": {
     "up": "npx db-migrate up",
-    "reset": "npx db-migrate reset"
+    "reset": "npx db-migrate reset",
+    "test": "yarn up --env mysql; yarn up --env pgsql; yarn up --env sqlite3"
   },
   "devDependencies": {
     "db-migrate": "^0.11.6",
     "db-migrate-mysql": "^1.1.10",
+    "db-migrate-pg": "^1.0.0",
     "db-migrate-sqlite3": "^0.4.0"
   }
 }

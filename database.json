@@ -9,6 +9,14 @@
     "driver": "mysql",
     "host": "mysql-server",
     "multipleStatements": true,
-    "user": "root"
+    "user": "user",
+    "password": "passw0rd"
+  },
+  "pgsql": {
+    "driver": "pg",
+    "user": "user",
+    "host": "pgsql-server",
+    "database": "circle_test",
+    "password": "passw0rd"
   }
 }
