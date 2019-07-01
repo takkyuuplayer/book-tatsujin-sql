@@ -1,6 +1,7 @@
 version: '3'
 services:
-  book-tatsujin-sql:
+  app:
+    container_name: book-tatsujin-sql
     image: circleci/node:latest
     links:
       - mysql-server
