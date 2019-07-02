@@ -1,5 +1,4 @@
 [![CircleCI](https://circleci.com/gh/takkyuuplayer/book-tatsujin-sql.svg?style=svg&circle-token=b4fee7d698f007bfdc19bf3c13264241c95e892d)](https://circleci.com/gh/takkyuuplayer/book-tatsujin-sql)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # book-tatsujin-sql
 
